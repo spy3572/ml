@@ -1,0 +1,34 @@
+from sklearn.datasets import load_digits
+from sklearn.linear_model import SGDClassifier
+import matplotlib.pyplot as plt
+
+mnist_datasets = load_digits()
+mnist_datasets.keys()
+
+X_data, y_data  = mnist_datasets['data'], mnist_datasets['target']
+
+X_data.shape
+
+y_data.shape
+
+first_digit = X_data[1]
+first_digit_image = first_digit.reshape(8, 8)
+plt.imshow(first_digit_image)
+plt.axis("off")
+plt.show()
+
+X_train_data, X_test_data, y_train_data, y_test_data = X_data[:1600], X_data[1600:], y_data[:1600], y_data[1600:]
+X_train_data.shape
+
+X_test_data.shape
+
+y_train_data.shape
+
+y_test_data.shape
+
+y_predict_digit = (y_train_data == 1)
+
+sgd_classifier = SGDClassifier(random_state=42)
+sgd_classifier.fit(X_train_data, y_predict_digit)
+
+sgd_classifier.predict([first_digit])
